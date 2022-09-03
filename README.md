@@ -2,6 +2,21 @@
 
 This library allows you to call "fittings" from your [Pipdream](https://pipedream.com) (or compatible) workflow.
 
+## Usage
+
+Using Pipe Adapter is pretty easy:
+```python
+from pipeadapter import connect
+input = {}
+input["key"] = "value"
+return connect('fitting', input)
+```
+
+You need to know:
+ 1. What Fitting you want to use
+ 2. The inputs to pass to that Fitting
+ 3. What values to provide to those inputs.
+
 ## Fittings
 
 The modules used by Pipeadapter are functors based on the [eons library](https://github.com/eons-dev/lib_eons).

@@ -1,13 +1,27 @@
 import os
 import logging
 import eons as e
+from dotdict import dotdict
 from pathlib import Path
 from .Exceptions import *
 
-class Connect(e.Executor):
+#Interface method for use in other python code.
+def connect(fitting, input={}, **kwargs):
+    connector = Connector()
+    return connector(fitting, input, **kwargs)
+
+class Connector(e.Executor):
 
     def __init__(this):
-        super().__init__(name="eons Basic Build System", descriptionStr="A hackable build system for all builds!")
+        super().__init__(name="Pipe Adapter", descriptionStr="An eons adapter for Pipedream")
+
+        #Spoof args, since we won't be using this on the command line.
+        this.args = dotdict({
+            'no_repo': False,
+            'verbose': 1,
+            'quiet': 0,
+            'config': None
+        })
 
         #Outputs are consolidated from Fitting.
         this.output = {}
@@ -24,7 +38,7 @@ class Connect(e.Executor):
         this.fittingName = fitting
         this.input = input
         super().__call__(**kwargs)
-        return output
+        return this.output #set in UserFunction()
 
     #Disable argument parsing, since this will not be called from the command line.
     def ParseArgs(this):
