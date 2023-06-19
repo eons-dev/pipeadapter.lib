@@ -1,4 +1,6 @@
 {
+  "name": "pipeadapter",
+  "type": "lib",
   "next": [
     {
       "build" : "py_package",
